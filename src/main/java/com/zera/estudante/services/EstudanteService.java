@@ -17,8 +17,12 @@ public class EstudanteService {
         return estudanteRepository.save(estudanteModel);
     }
 
-    public List<EstudanteModel> buscarTodosEstudantes(){
+    public List<EstudanteModel> buscarTodosEstudantes() {
         return estudanteRepository.findAll();
+    }
+
+    public EstudanteModel buscarPorID(Long id) {
+        return estudanteRepository.findById(id).get();
     }
 
     public void deletarEstudante(Long id){
