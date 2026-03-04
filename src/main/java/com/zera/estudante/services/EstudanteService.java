@@ -29,4 +29,12 @@ public class EstudanteService {
         estudanteRepository.deleteById(id);
     }
 
+    public EstudanteModel atualizarEstudante(Long id, EstudanteModel estudanteModel){
+        EstudanteModel newEstudante = estudanteRepository.findById(id).get();
+        newEstudante.setNome(estudanteModel.getNome());
+        newEstudante.setEmail(estudanteModel.getEmail());
+        newEstudante.setIdade(estudanteModel.getIdade());
+        return estudanteRepository.save(newEstudante);
+    }
+
 }
