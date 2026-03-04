@@ -34,6 +34,11 @@ public class EstudanteController {
         return estudanteService.buscarPorID(id);
     }
 
+    @PutMapping
+    public EstudanteModel atualizarEstudante(Long id, EstudanteModel estudanteModel){
+        return estudanteService.atualizarEstudante(id, estudanteModel);
+    }
+
 
 
 
