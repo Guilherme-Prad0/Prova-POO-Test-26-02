@@ -35,8 +35,9 @@ public class EstudanteController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletarEstudante(@PathVariable Long id ){
+    public ResponseEntity<?> deletar (@PathVariable Long id){
         estudanteService.deletarEstudante(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
@@ -44,10 +45,11 @@ public class EstudanteController {
         return estudanteService.buscarPorID(id);
     }
 
-
     @PutMapping("/{id}")
-    public EstudanteModel atualizarEstudante(@PathVariable Long id, @RequestBody EstudanteModel estudanteModel){
+    public ResponseEntity<EstudanteModel> atualizarEstudante(@PathVariable Long id, @RequestBody EstudanteModel estudanteModel){
         return estudanteService.atualizarEstudante(id, estudanteModel);
+
+
     }
 
 
