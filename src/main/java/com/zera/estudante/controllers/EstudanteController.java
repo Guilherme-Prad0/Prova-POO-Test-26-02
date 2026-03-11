@@ -3,8 +3,11 @@ package com.zera.estudante.controllers;
 import com.zera.estudante.models.EstudanteModel;
 import com.zera.estudante.services.EstudanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -15,13 +18,20 @@ public class EstudanteController {
     private EstudanteService estudanteService;
 
     @PostMapping
-    public EstudanteModel criarEstudante(EstudanteModel estudanteModel){
-        return estudanteService.criarEstudante(estudanteModel);
+    public ResponseEntity<EstudanteModel> criarEstudante(@RequestBody EstudanteModel estudanteModel){
+        EstudanteModel request = estudanteService.criarEstudante(estudanteModel);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(estudanteModel.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(request);
     }
 
     @GetMapping
-    public List<EstudanteModel> buscarTodosEstudantes(){
-        return estudanteService.buscarTodosEstudantes();
+    public ResponseEntity<List<EstudanteModel>> findAll(){
+        List<EstudanteModel> request = estudanteService.buscarTodosEstudantes();
+        return ResponseEntity.ok().body(request);
     }
 
     @DeleteMapping("/{id}")
